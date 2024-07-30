@@ -9,7 +9,7 @@ cart.forEach((cartItem) =>{
     let matchingProduct;
 
     const cartItemId = cartItem.productId;
-
+    //products 是指produst list裡面
     products.forEach((product)=>{
       if(cartItemId === product.id){
         matchingProduct = product;
@@ -32,11 +32,11 @@ cart.forEach((cartItem) =>{
                             ${matchingProduct.name}
                         </div>
                         <div class="product-price">
-                        $${matchingProduct.priceCents}
+                        $${matchingProduct.priceCents/100}
                         </div>
                         <div class="product-quantity">
                         <span>
-                            Quantity: <span class="quantity-label">2</span>
+                            Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                         </span>
                         <span class="update-quantity-link link-primary">
                             Update
@@ -54,7 +54,7 @@ cart.forEach((cartItem) =>{
                         <div class="delivery-option">
                         <input type="radio" checked
                             class="delivery-option-input"
-                            name="delivery-option-1">
+                            name="${matchingProduct.id}">
                         <div>
                             <div class="delivery-option-date">
                             Tuesday, June 21
@@ -67,7 +67,7 @@ cart.forEach((cartItem) =>{
                         <div class="delivery-option">
                         <input type="radio"
                             class="delivery-option-input"
-                            name="delivery-option-1">
+                            name="${matchingProduct.id}"">
                         <div>
                             <div class="delivery-option-date">
                             Wednesday, June 15
@@ -80,7 +80,7 @@ cart.forEach((cartItem) =>{
                         <div class="delivery-option">
                         <input type="radio"
                             class="delivery-option-input"
-                            name="delivery-option-1">
+                            name="${matchingProduct.id}"">
                         <div>
                             <div class="delivery-option-date">
                             Monday, June 13
