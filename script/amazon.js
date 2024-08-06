@@ -1,6 +1,7 @@
 
 import {cart, addTocart} from '../data/cart.js';
 import {products} from '../data/products.js'
+import {formatCurrency} from'./utils/money.js';
 let productsHTML = '';
 products.forEach((product)=>{
 
@@ -23,7 +24,7 @@ productsHTML += `<div class="product-container">
           </div>
 
           <div class="product-price">
-            $${product.priceCents/100}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -69,9 +70,6 @@ function addQuantity(productId){
  cart_quantity.innerHTML = totalQuantity
 
   //add 'added to cart' msg
-
-
-
   const addMsg = document.querySelector(`.js-added-${productId}`)
   addMsg.classList.add('added-to-cart-visible');
 
@@ -82,6 +80,7 @@ function addQuantity(productId){
 
 }
 
+//將商品內容顯示
 const productGrid = document.querySelector('.js-product-grid').innerHTML = productsHTML;
 
 const buttons = document.querySelectorAll('.add-to-cart-button')
