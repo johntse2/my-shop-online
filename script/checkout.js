@@ -111,13 +111,15 @@ let deleteButton = document.querySelectorAll('.js-delete-link')
             const deleteProductId = deletebtn.dataset.productId
             removeFromCart(deleteProductId);
         
-         const container = document.querySelector(`.js-cart-item-container-${deleteProductId}`);
-        container.remove();
+            const container = document.querySelector(`.js-cart-item-container-${deleteProductId}`);
+            container.remove();
          
 
     })
 
 })
+
+
 
 
 

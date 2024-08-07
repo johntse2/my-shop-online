@@ -1,27 +1,22 @@
-export let cart = [
-    
-    {
-    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity:1,
-    name :'Cotton Socks'
+export let cart = JSON.parse(localStorage.getItem('cart'));
 
-    },
-
-    {
-    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity:1,
-    name : 'Basketball'
+if(!cart){
+  cart = [ ];
+}
+console.log(cart);
 
 
-    }
- 
-];
 
+function saveToStorage(){
+    localStorage.setItem('cart',JSON.stringify(cart))
+
+}
+//將物品加到購物車
 export function addTocart(productId){
 
     //加入同一件物件做法
     let matchingItem; 
-       
+   
     cart.forEach((cartItem) =>{
        
        if(productId === cartItem.productId) {
@@ -30,6 +25,7 @@ export function addTocart(productId){
        }
     })
 
+    
    const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)
   
    let quantity = Number(quantitySelect.value)
@@ -47,6 +43,7 @@ export function addTocart(productId){
                 }) 
             
         }
+    saveToStorage()
   
   }
 
@@ -57,14 +54,14 @@ export function addTocart(productId){
       if(cartItem.productId !== deleteProductId){
 
         newCartArray.push(cartItem);
-      
-       
-        cart = newCartArray;
-        console.log(cartItem.productId); 
+
         // const order_Summary= document.querySelector ('.order-summary');
         // order_Summary.classList.add(`.js-cart-item-container-${cartItem.productId}`)
       }
     })
-  
+
+    cart = newCartArray;
+    saveToStorage();
+    console.log(cart);
    
   }
