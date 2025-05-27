@@ -1,7 +1,9 @@
-
-import {cart, addTocart} from '../data/cart.js';
+ 
+import {cart, addTocart, calculateCartQuantity} from '../data/cart.js';
 import {products} from '../data/products.js'
 import {formatCurrency} from'./utils/money.js';
+
+//先製造一個空白字串，然後loop一下商品，將它們都放在HTML
 let productsHTML = '';
 products.forEach((product)=>{
 
@@ -57,45 +59,51 @@ productsHTML += `<div class="product-container">
 })
 
 
-
-function addQuantity(productId){
+//改變商品數量
+function updateCartQuantity(productId){
   
   const cart_quantity = document.querySelector('.cart-quantity');
 
-  let totalQuantity = 0;
+  // let totalQuantity = 0;
 
-  cart.forEach((item)=>{
-    totalQuantity = totalQuantity + item.quantity 
-  })
- cart_quantity.innerHTML = totalQuantity
+  // cart.forEach((item)=>{
+  //   totalQuantity = totalQuantity + item.quantity 
+  // })
+ const totalQuantity = calculateCartQuantity();
+ localStorage.setItem('quantity',totalQuantity);
+  
+ cart_quantity.innerHTML = localStorage.getItem('quantity');
 
   //add 'added to cart' msg
-  const addMsg = document.querySelector(`.js-added-${productId}`)
-  addMsg.classList.add('added-to-cart-visible');
+//   const addMsg = document.querySelector(`.js-added-${productId}`)
+//   addMsg.classList.add('added-to-cart-visible');
 
  
- const timeout = setTimeout(() =>{
-    addMsg.classList.remove('added-to-cart-visible');
-  }, 500)
+//  const timeout = setTimeout(() =>{
+//     addMsg.classList.remove('added-to-cart-visible');
+//   }, 500)
 
 }
 
-//將商品內容顯示
-const productGrid = document.querySelector('.js-product-grid').innerHTML = productsHTML;
 
+//將商品內容顯示在頁面
+document.querySelector('.js-product-grid').innerHTML = productsHTML;
+
+updateCartQuantity();
+//'click' button 將商品加到購物車
 const buttons = document.querySelectorAll('.add-to-cart-button')
-
 buttons.forEach((button) =>{
     
     button.addEventListener('click', ()=>{
     let productId =  button.dataset.productId
     
     addTocart(productId);
-    addQuantity(productId);
-
+    updateCartQuantity(productId);
+console.log(cart);
 
     })
 })
+
 
 
 
