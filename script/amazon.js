@@ -59,20 +59,14 @@ productsHTML += `<div class="product-container">
 })
 
 
-//改變商品數量
+//改變商品數量function
 function updateCartQuantity(productId){
   
-  const cart_quantity = document.querySelector('.cart-quantity');
+const cart_quantity = document.querySelector('.cart-quantity');
 
-  // let totalQuantity = 0;
+const totalQuantity = calculateCartQuantity();
 
-  // cart.forEach((item)=>{
-  //   totalQuantity = totalQuantity + item.quantity 
-  // })
- const totalQuantity = calculateCartQuantity();
- localStorage.setItem('quantity',totalQuantity);
-  
- cart_quantity.innerHTML = localStorage.getItem('quantity');
+cart_quantity.innerHTML = totalQuantity;
 
   //add 'added to cart' msg
 //   const addMsg = document.querySelector(`.js-added-${productId}`)

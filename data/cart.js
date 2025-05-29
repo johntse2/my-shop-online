@@ -62,6 +62,8 @@ export function addTocart(productId){
          
             
         }
+
+
     saveToStorage()//更新購物車cart locakStorage
   
   }
@@ -92,4 +94,20 @@ export function addTocart(productId){
      
   })
    return totalQuantity;
+  }
+
+ export function updateQuantity(saveProductID, newQuantity){
+      let matchingItem;
+    
+   cart.forEach((cartItem)=>{
+      if (cartItem.productId === saveProductID){
+        matchingItem = cartItem;
+      }
+    })
+       if(matchingItem){
+          matchingItem.quantity = newQuantity;
+        
+          
+        }
+    saveToStorage()
   }
