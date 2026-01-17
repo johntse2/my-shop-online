@@ -1,4 +1,4 @@
-export const deliveryOption = [
+export const deliveryOptions = [
     {
         id:"1",
         deliveryTime:7,
@@ -13,8 +13,5 @@ export const deliveryOption = [
         id:"3",
         deliveryTime:1,
         priceCent:999
-    },
-
-
-
+    }
 ]

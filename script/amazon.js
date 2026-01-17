@@ -1,13 +1,13 @@
- 
-import {cart, addTocart, calculateCartQuantity} from '../data/cart.js';
-import {products} from '../data/products.js'
-import {formatCurrency} from'./utils/money.js';
+
+import { cart, addTocart, calculateCartQuantity } from '../data/cart.js';
+import { products } from '../data/products.js'
+import { formatCurrency } from './utils/money.js';
 
 //先製造一個空白字串，然後loop一下商品，將它們都放在HTML
 let productsHTML = '';
-products.forEach((product)=>{
+products.forEach((product) => {
 
-productsHTML += `<div class="product-container">
+  productsHTML += `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
               src="${product.image}">
@@ -19,7 +19,7 @@ productsHTML += `<div class="product-container">
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars*10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
               87
             </div>
@@ -60,22 +60,19 @@ productsHTML += `<div class="product-container">
 
 
 //改變商品數量function
-function updateCartQuantity(productId){
-  
-const cart_quantity = document.querySelector('.cart-quantity');
-
-const totalQuantity = calculateCartQuantity();
-
-cart_quantity.innerHTML = totalQuantity;
+function updateCartQuantity(productId) {
+  const cart_quantity = document.querySelector('.cart-quantity');
+  const totalQuantity = calculateCartQuantity();
+  cart_quantity.innerHTML = totalQuantity;
 
   //add 'added to cart' msg
-//   const addMsg = document.querySelector(`.js-added-${productId}`)
-//   addMsg.classList.add('added-to-cart-visible');
+  //   const addMsg = document.querySelector(`.js-added-${productId}`)
+  //   addMsg.classList.add('added-to-cart-visible');
 
- 
-//  const timeout = setTimeout(() =>{
-//     addMsg.classList.remove('added-to-cart-visible');
-//   }, 500)
+
+  //  const timeout = setTimeout(() =>{
+  //     addMsg.classList.remove('added-to-cart-visible');
+  //   }, 500)
 
 }
 
@@ -86,16 +83,16 @@ document.querySelector('.js-product-grid').innerHTML = productsHTML;
 updateCartQuantity();
 //'click' button 將商品加到購物車
 const buttons = document.querySelectorAll('.add-to-cart-button')
-buttons.forEach((button) =>{
-    
-    button.addEventListener('click', ()=>{
-    let productId =  button.dataset.productId
-    
+buttons.forEach((button) => {
+
+  button.addEventListener('click', () => {
+    let productId = button.dataset.productId
+
     addTocart(productId);
     updateCartQuantity(productId);
-console.log(cart);
+    console.log(cart);
 
-    })
+  })
 })
 
 
