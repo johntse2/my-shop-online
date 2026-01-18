@@ -46,7 +46,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart js-added-${product.id}">
+          <div class="added-to-cart added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -59,20 +59,13 @@ products.forEach((product) => {
 })
 
 
-//改變商品數量function
+//改變商品數量
 function updateCartQuantity(productId) {
   const cart_quantity = document.querySelector('.cart-quantity');
   const totalQuantity = calculateCartQuantity();
   cart_quantity.innerHTML = totalQuantity;
 
-  //add 'added to cart' msg
-  //   const addMsg = document.querySelector(`.js-added-${productId}`)
-  //   addMsg.classList.add('added-to-cart-visible');
-
-
-  //  const timeout = setTimeout(() =>{
-  //     addMsg.classList.remove('added-to-cart-visible');
-  //   }, 500)
+ 
 
 }
 
@@ -90,7 +83,14 @@ buttons.forEach((button) => {
 
     addTocart(productId);
     updateCartQuantity(productId);
-    console.log(cart);
+
+     //add 'added to cart' msg
+    const addedMessage = document.querySelector(`.added-to-cart-${productId}`)
+    addedMessage.classList.add('added-to-cart-visible');
+
+    setTimeout(() =>{
+      addedMessage.classList.remove('added-to-cart-visible');
+    }, 700)
 
   })
 })

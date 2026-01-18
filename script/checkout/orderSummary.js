@@ -4,7 +4,7 @@ import { cart, removeFromCart, calculateCartQuantity, updateQuantity, saveToStor
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions } from "../../data/deliveryOption.js";
-
+import  {renderPaymentSummary} from "./paymentSummary.js";
 //const today = dayjs();
 //const deliveryDate = today.add(7,'days');
 //console.log(deliveryDate.format('dddd, MMMM D YYYY'));
@@ -14,19 +14,18 @@ export function renderOrderSummary(){
     //將儲存在localStorage的商品loop一次，發現有data裡的商品一致產生一個變數matching product
     cart.forEach((cartItem) => {
         let matchingProduct;
-
-        const cartItemId = cartItem.productId;
+        const productId = cartItem.productId;
         //products 是指produst list裡面，這樣可以取得product所有資料，用於下面
         products.forEach((product) => {
-            if (cartItemId === product.id) {
+            if (product.id === productId) {
                 matchingProduct = product;
             }
         })
-
+        const deliveryOptionId = cartItem.deliveryOptionId;
         function todayfunction() {
             let deliveryOption = "";
             deliveryOptions.forEach(option => {
-                if (option.id === cartItem.deliveryOptionId) {
+                if (option.id === deliveryOptionId) {
                     deliveryOption = option;
                 }
 
@@ -95,8 +94,6 @@ export function renderOrderSummary(){
         deliveryOptions.forEach((option) => {
             var today = dayjs();
             var deliveryDate = today.add(option.deliveryTime, 'days');
-
-
             const dateString = deliveryDate.format('DD, MMMM YYYY');
             const priceString = option.priceCent === 0
                 ? 'free'
@@ -106,7 +103,7 @@ export function renderOrderSummary(){
             html +=
                 `
                 <div>
-                            <div class="delivery-option js-delivery-option"
+                        <div class="delivery-option js-delivery-option"
                             data-product-id = '${matchingProduct.id}'
                             data-delivery-option-id = '${option.id}'
                             >
@@ -218,7 +215,7 @@ export function renderOrderSummary(){
             const{productId ,deliveryOptionId} = element.dataset;
             updateDeliveryOption(productId , deliveryOptionId);
             renderOrderSummary();
-
+            renderPaymentSummary();
         });
     })
     return null;
