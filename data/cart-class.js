@@ -42,8 +42,8 @@ class Cart {
          const matchingProduct = getProduct(productId);
 
         //顯示購物車的商品數量
-        //const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)
-        //let quantity = Number(quantitySelect.value)
+        const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)
+        let quantity = Number(quantitySelect.value)
 
         if (matchingItem) { //如果加過同樣商品 quantity就會加上去
             matchingItem.quantity += 1;
@@ -52,7 +52,7 @@ class Cart {
             this.cartItems.push({
                 productId: productId,
                 name: matchingProduct.name,
-                quantity: 1,
+                quantity: quantity,
                 deliveryOptionId: '1'
             })
         }

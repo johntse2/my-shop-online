@@ -41,6 +41,7 @@ export function addTocart(productId) {
   })
 
 
+  const matchingProduct = getProduct(productId);
 
   //取得加到購物車的商品數量
   const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)
