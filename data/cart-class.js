@@ -1,15 +1,15 @@
 import { products } from "../data/products.js";
 
 class Cart {
-    cartItems = undefined;
-    localStorageKey = undefined;
+    cartItems;
+    #localStorageKey;//amany localstorage names
 
     constructor(_localStorageKey){
-        this.localStorageKey = _localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = _localStorageKey;
+        this.#loadFromStorage();
     }
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
         if (!this.cartItems) {
             this.cartItems = [
                 {
@@ -27,7 +27,7 @@ class Cart {
         }
     }
     saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
     //將商品加到購物車
     addTocart(productId) {
@@ -39,12 +39,7 @@ class Cart {
         })
 
         //用於array裡顯示商品全部data
-        let matchingProduct;
-        products.forEach((product) => {
-            if (productId === product.id) {
-                matchingProduct = product;
-            }
-        })
+         const matchingProduct = getProduct(productId);
 
         //顯示購物車的商品數量
         //const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)

@@ -1,4 +1,4 @@
-import { products } from "../data/products.js";
+import { products, getProduct } from "../data/products.js";
 export let cart = undefined;
 
 loadFromStorage();
@@ -40,14 +40,6 @@ export function addTocart(productId) {
     }
   })
 
-  //用於array裡顯示商品全部data
-  let matchingProduct;
-  products.forEach((product) => {
-    if (productId === product.id) {
-      matchingProduct = product;
-
-    }
-  })
 
 
   //取得加到購物車的商品數量

@@ -31,6 +31,6 @@ export function getDeliveryOption(deliveryOptionId) {
 export function calculateDeliveryDate(deliveryOption) {
     var today = dayjs();
     var deliveryDate = today.add(deliveryOption.deliveryTime, 'days');
-    const dateString = deliveryDate.format('DD, MMMM YYYY');
+    const dateString = deliveryDate.format('ddd M/D/YYYY');
     return dateString;
 }
