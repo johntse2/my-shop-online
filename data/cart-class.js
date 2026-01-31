@@ -1,4 +1,4 @@
-import { products } from "../data/products.js";
+import { products, getProduct} from "../data/products.js";
 
 class Cart {
     cartItems;
@@ -114,12 +114,9 @@ class Cart {
 
 
 
-const newCart = new Cart("cart-oop");
+export const cart = new Cart("cart-oop");
 const bussinessCart = new Cart("cart-bussiness");
 
-
-console.log(newCart);
-console.log(bussinessCart);
 
 
 

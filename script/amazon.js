@@ -1,7 +1,6 @@
 
-import { cart, addTocart, calculateCartQuantity } from '../data/cart.js';
+import {calculateCartQuantity, addTocart} from '../data/cart.js';
 import { products } from '../data/products.js'
-import { formatCurrency } from './utils/money.js';
 
 //先製造一個空白字串，然後loop一下商品，將它們都放在HTML
 let productsHTML = '';
@@ -9,7 +8,7 @@ products.forEach((product) => {
 
   productsHTML += `<div class="product-container">
           <div class="product-image-container">
-            <img class="product-image"
+           <a > <img class="product-image"
               src="${product.image}">
           </div>
 
@@ -44,7 +43,7 @@ products.forEach((product) => {
             </select>
           </div>
 
-          ${product.extraInfoHTML()}
+     
           
           <div class="product-spacer">
           </div>
@@ -62,13 +61,11 @@ products.forEach((product) => {
 })
 
 
-//改變商品數量
-function updateCartQuantity(productId) {
+//改變商品數量 //header
+function updateCartQuantity() {
   const cart_quantity = document.querySelector('.cart-quantity');
   const totalQuantity = calculateCartQuantity();
   cart_quantity.innerHTML = totalQuantity;
-
- 
 
 }
 
@@ -83,6 +80,9 @@ buttons.forEach((button) => {
 
   button.addEventListener('click', () => {
     let productId = button.dataset.productId
+
+    const quantitySelect = document.querySelector(`.js-quantity-selector-${productId}`)
+    let quantity = Number(quantitySelect.value)
 
     addTocart(productId);
     updateCartQuantity(productId);

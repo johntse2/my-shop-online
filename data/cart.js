@@ -2,6 +2,8 @@ import { products, getProduct } from "../data/products.js";
 export let cart = undefined;
 
 loadFromStorage();
+
+
 export function loadFromStorage() {
   cart = JSON.parse(localStorage.getItem('cart'));
   if (!cart) {
@@ -126,6 +128,8 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
   saveToStorage();
 }
+
+
 
 
 

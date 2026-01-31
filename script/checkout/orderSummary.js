@@ -1,13 +1,9 @@
 
 import { getProduct, products } from "../../data/products.js";
-import { cart, removeFromCart, calculateCartQuantity, updateQuantity, saveToStorage, updateDeliveryOption } from "../../data/cart.js";
+import {cart, calculateCartQuantity, updateQuantity, updateDeliveryOption, removeFromCart} from "../../data/cart.js";
 import { formatCurrency } from "../utils/money.js";
-import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOption.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
-//const today = dayjs();
-//const deliveryDate = today.add(7,'days');
-//console.log(deliveryDate.format('dddd, MMMM D YYYY'));
 
 export function renderOrderSummary() {
     let cartSummaryHTML = "";

@@ -1,54 +1,72 @@
 import { formatCurrency } from "../script/utils/money.js";
 
-export function getProduct(pruductId){
-   let matchingProduct;
-      products.forEach((product) => {
-              if (product.id === pruductId) {
-                  matchingProduct = product;
-              }
-             
-            })
-            return matchingProduct;
+export function getProduct(pruductId) {
+  let matchingProduct;
+  products.forEach((product) => {
+    if (product.id === pruductId) {
+      matchingProduct = product;
+    }
+
+  })
+  return matchingProduct;
 }
 
-class Product{
+class Product {
   id;
   image;
   name;
   rating;
   priceCents;
-  
 
-  constructor(productDetails){
+
+  constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image;
     this.name = productDetails.name;
     this.rating = productDetails.rating;
-    this.priceCents = productDetails.priceCents; 
+    this.priceCents = productDetails.priceCents;
   }
 
-  getStarUrl(){
+  getStarUrl() {
     return `images/ratings/rating-${this.rating.stars * 10}.png`
   }
-  getPrice(){
-      return `$${formatCurrency(this.priceCents)}`
+  getPrice() {
+    return `$${formatCurrency(this.priceCents)}`
   }
-  extraInfoHTML(){
-   return "";
+  extraInfoHTML() {
+    return "";
   }
 }
 
-class Clothing extends Product{
+class Clothing extends Product {
   sizeChartLink;
 
-  constructor(productDetails){
+  constructor(productDetails) {
     super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
   }
-  extraInfoHTML(){
+  extraInfoHTML() {
     return `<a href = ${this.sizeChartLink} target = "_blank">Size Chart</a>`
   }
 }
+
+class Appliance extends Product {
+  instructionLink;
+  warrantyLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionLink = productDetails.instructionLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+
+  extraInfoHTML() {
+    return `<a href = ${this.instructionLink} target = "_blank">Instruction</a>
+    <a href = ${this.warrantyLink} target = "_blank">Warranty</a>`
+  }
+
+}
+
 
 
 export const products = [
@@ -111,7 +129,11 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    instructionLink:"images/appliance-instructions.png",
+    warrantyLink:"images/appliance-warranty.png"
+
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -298,7 +320,10 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: "appliance",
+    instructionLink:"images/appliance-instructions.png",
+    warrantyLink:"images/appliance-warranty.png"
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -663,7 +688,10 @@ export const products = [
       "food blenders",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    instructionLink:"images/appliance-instructions.png",
+    warrantyLink:"images/appliance-warranty.png"
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -716,7 +744,27 @@ export const products = [
   if(productDetails.type === "clothing"){
     return new Clothing (productDetails);
   }
+   if(productDetails.type === "appliance"){
+    return new Appliance (productDetails);
+  }
   return new Product (productDetails);
 });
+
+/*
+const obj = {
+ name:"John",
+  method(){
+    console.log(this);
+    [1,2,3].forEach(()=>{
+      console.log(this);
+      
+    })
+  }
+}
+
+obj.method();
+console.log(this);
+
+*/
 
 
