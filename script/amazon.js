@@ -1,5 +1,5 @@
 
-import {calculateCartQuantity, addTocart} from '../data/cart.js';
+import { addTocart, updateCartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js'
 
 //先製造一個空白字串，然後loop一下商品，將它們都放在HTML
@@ -7,11 +7,11 @@ let productsHTML = '';
 products.forEach((product) => {
 
   productsHTML += `<div class="product-container">
+        <a href="item.html?productId=${product.id}">
           <div class="product-image-container">
-           <a > <img class="product-image"
-              src="${product.image}">
+             <img class="product-image" src="${product.image}">
           </div>
-
+        </a>
           <div class="product-name limit-text-to-2-lines">
             ${product.name}
           </div>
@@ -59,21 +59,12 @@ products.forEach((product) => {
         </div>`;
 
 })
-
-
-//改變商品數量 //header
-function updateCartQuantity() {
-  const cart_quantity = document.querySelector('.cart-quantity');
-  const totalQuantity = calculateCartQuantity();
-  cart_quantity.innerHTML = totalQuantity;
-
-}
-
-
 //將商品內容顯示在頁面
 document.querySelector('.js-product-grid').innerHTML = productsHTML;
 
+
 updateCartQuantity();
+
 //'click' button 將商品加到購物車
 const buttons = document.querySelectorAll('.add-to-cart-button')
 buttons.forEach((button) => {
@@ -87,16 +78,17 @@ buttons.forEach((button) => {
     addTocart(productId);
     updateCartQuantity(productId);
 
-     //add 'added to cart' msg
+    //add 'added to cart' msg
     const addedMessage = document.querySelector(`.added-to-cart-${productId}`)
     addedMessage.classList.add('added-to-cart-visible');
 
-    setTimeout(() =>{
+    setTimeout(() => {
       addedMessage.classList.remove('added-to-cart-visible');
     }, 700)
 
   })
 })
+
 
 
 

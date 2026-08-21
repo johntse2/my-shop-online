@@ -39,7 +39,7 @@
 }
 
 .amazon-logo {
-  width: 100px;
+  width: 150px;
   margin-top: 5px;
 }
 
@@ -54,7 +54,7 @@
 
   .amazon-mobile-logo {
     display: block;
-    height: 35px;
+    height: 40px;
     margin-top: 5px;
   }
 }
@@ -81,7 +81,8 @@
 }
 
 .search-button {
-  background-color: rgb(254, 189, 105);
+  /* background-color: rgb(254, 189, 105); */
+  background-color: rgb(255, 255, 255); 
   border: none;
   width: 45px;
   height: 40px;
@@ -97,13 +98,15 @@
 }
 
 .amazon-header-right-section {
-  width: 180px;
+  width: 200px;
   flex-shrink: 0;
   display: flex;
   justify-content: end;
 }
 
 .orders-link {
+  display:flex;
+  align-items: center;
   color: white;
 }
 
@@ -115,7 +118,7 @@
 .orders-text {
   display: block;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .cart-link {
@@ -146,4 +149,9 @@
   
   width: 26px;
   text-align: center;
+}
+
+.login-link {
+  display: flex;
+  align-items: center;
 }

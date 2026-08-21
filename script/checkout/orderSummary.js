@@ -53,7 +53,7 @@ export function renderOrderSummary() {
 
                         <div class="delivery-options">
                             <div class="delivery-options-title">
-                                hoose a delivery option:
+                                Choose a delivery option:
                             </div>
                         ${deliveryOptionHTML(matchingProduct, cartItem)}
                             
@@ -95,7 +95,7 @@ export function renderOrderSummary() {
                                 ${dateString}
                                 </div>
                                 <div class="delivery-option-price">
-                                ${priceString} - Shipping
+                                ${priceString} - Shipping (${option.deliveryTime} days)
                                 </div>
                             </div>
                             </div>
