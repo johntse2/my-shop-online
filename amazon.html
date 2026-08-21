@@ -1,65 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Amazon Project</title>
 
-    <!-- This code is needed for responsive design to work.
+<head>
+  <title>Amazon Project</title>
+
+  <!-- This code is needed for responsive design to work.
       (Responsive design = make the website look good on
       smaller screen sizes like a phone or a tablet). -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Load a font called Roboto from Google Fonts. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Load a font called Roboto from Google Fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Here are the CSS files for this page. -->
-    <link rel="stylesheet" href="styles/shared/general.css">
-    <link rel="stylesheet" href="styles/shared/amazon-header.css">
-    <link rel="stylesheet" href="styles/pages/amazon.css">
-  </head>
-  <body>
-    <div class="amazon-header">
-      <div class="amazon-header-left-section">
-        <a href="amazon.html" class="header-link">
-          <img class="amazon-logo"
-            src="images/amazon-logo-white.png">
-          <img class="amazon-mobile-logo"
-            src="images/amazon-mobile-logo-white.png">
-        </a>
+  <!-- Here are the CSS files for this page. -->
+  <link rel="stylesheet" href="styles/shared/general.css">
+  <link rel="stylesheet" href="styles/shared/amazon-header.css">
+  <link rel="stylesheet" href="styles/pages/amazon.css">
+</head>
+
+<body>
+  <div class="amazon-header">
+    <div class="amazon-header-left-section">
+      <a href="amazon.html" class="header-link">
+        <img class="amazon-logo" src="images/Shop-Online-logo.png">
+        <img class="amazon-mobile-logo" src="images/Shop-Online-mobile-logo.png">
+      </a>
+    </div>
+
+    <div class="amazon-header-middle-section">
+      <input class="search-bar" type="text" placeholder="Search">
+
+      <button class="search-button">
+        <img class="search-icon" src="images/icons/search-icon.png">
+      </button>
+    </div>
+
+    <div class="amazon-header-right-section">
+      <!-- 新增登入按鈕 -->
+      <div class="login-link header-link js-login-button">
+        <span class="orders-text">Login</span>
+      </div>
+      <a class="orders-link header-link" href="orders.html">
+        <!-- <span class="returns-text">Returns</span> -->
+        <span class="orders-text">Orders</span>
+      </a>
+
+      <a class="cart-link header-link" href="checkout.html">
+        <img class="cart-icon" src="images/icons/cart-icon.png">
+        <div class="cart-quantity"></div>
+        <div class="cart-text">Cart</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="products-grid js-product-grid">
+
+    </div>
+  </div>
+
+  <!-- 登入彈窗結構 (放在 </body> 結束前) -->
+  <div class="modal-overlay js-modal-overlay">
+    <div class="auth-modal">
+      <button class="close-modal js-close-modal">&times;</button>
+
+      <div class="auth-content" id="login-form">
+        <h2>Sign-In</h2>
+        <input type="email" placeholder="Email" class="auth-input">
+        <input type="password" placeholder="Password" class="auth-input">
+        <button class="button-primary auth-main-btn">Continue</button>
+
+        <div class="separator"><span>or</span></div>
+
+        <div class="social-login">
+          <button class="social-btn google"><img src="images/icons/google-icon.png"> Google</button>
+          <button class="social-btn apple"><img src="images/icons/apple-icon.png"> Apple</button>
+          <button class="social-btn facebook"><img src="images/icons/facebook-icon.png"> Facebook</button>
+        </div>
+
+        <p class="switch-auth">New to Shop Online? <a href="#" class="js-switch-to-signup">Create your account</a></p>
       </div>
 
-      <div class="amazon-header-middle-section">
-        <input class="search-bar" type="text" placeholder="Search">
-
-        <button class="search-button">
-          <img class="search-icon" src="images/icons/search-icon.png">
-        </button>
-      </div>
-
-      <div class="amazon-header-right-section">
-        <a class="orders-link header-link" href="orders.html">
-          <span class="returns-text">Returns</span>
-          <span class="orders-text">& Orders</span>
-        </a>
-
-        <a class="cart-link header-link" href="checkout.html">
-          <img class="cart-icon" src="images/icons/cart-icon.png">
-          <div class="cart-quantity"></div>
-          <div class="cart-text">Cart</div>
-        </a>
+      <!-- 註冊表單 (預設隱藏) -->
+      <div class="auth-content" id="signup-form" style="display: none;">
+        <h2>Create Account</h2>
+        <input type="text" placeholder="Your name" class="auth-input">
+        <input type="email" placeholder="Email" class="auth-input">
+        <input type="password" placeholder="At least 6 characters" class="auth-input">
+        <button class="button-primary auth-main-btn">Create Account</button>
+        <p class="switch-auth">Already have an account? <a href="#" class="js-switch-to-login">Sign-In</a></p>
       </div>
     </div>
-    
-    <div class="main">
-      <div class="products-grid js-product-grid">
+  </div>
 
-      </div>
-    </div>
-      
-    
-      <script type='module' src = 'script/amazon.js'></script> 
-    
-  </body>
- 
+  <script type='module' src='script/amazon.js'></script>
+  <script type='module' src='script/utils/auth.js'></script>
+</body>
+
 </html>

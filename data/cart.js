@@ -110,6 +110,13 @@ export function updateQuantity(saveProductID, newQuantity) {
   saveToStorage()
 }
 
+//改變商品數量 //header
+export function updateCartQuantity() {
+  const cart_quantity = document.querySelector('.cart-quantity');
+  const totalQuantity = calculateCartQuantity();
+  cart_quantity.innerHTML = totalQuantity;
+
+}
 //for Update Delivery Option
 
 //以下方法

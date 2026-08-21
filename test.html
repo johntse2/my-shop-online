@@ -1,479 +1,96 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>阿嬤購物 - 商品詳情</title>
+    <title>随机展示4款产品</title>
     <style>
-        /* 全局樣式重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft JhengHei', sans-serif;
-        }
-
-        /* 導航欄樣式 */
-        header {
-            background-color: #ff6737;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 2rem;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .search-bar button {
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .cart-icon {
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* 商品內容區域 */
+        /* 简单样式美化，可根据需求修改 */
         .product-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: start;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
         }
-        .product-image{
-            margin: 0 auto;
-        }
-        .product-image img {
-            max-width:300px;
-            width: 100%;
-            height: auto;
+        .product-item {
+            width: 200px;
+            border: 1px solid #eee;
             border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .product-info h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .rating {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            gap: 0.5rem;
-        }
-
-        .stars {
-            color: #ffc107;
-            font-size: 1.2rem;
-        }
-
-        .review-count {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .discount-tag {
-            background-color: #ff6737;
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-
-        .sales-count {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .price {
-            margin-bottom: 1.5rem;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 1rem;
-            margin-right: 1rem;
-        }
-
-        .current-price {
-            color: #e63946;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .quantity {
-            margin-bottom: 2rem;
-        }
-
-        .quantity label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .quantity select {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            min-width: 80px;
-        }
-
-        .add-to-cart {
-            background-color: #ff6737;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background-color: #e85a2e;
-        }
-
-        /* 商品描述標籤頁區域 */
-        .product-details {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .detail-tabs {
-            display: flex;
-            border-bottom: 2px solid #eee;
-            margin-bottom: 2rem;
-        }
-
-        .tab-btn {
-            padding: 1rem 2rem;
-            border: none;
-            background: none;
-            font-size: 1.1rem;
-            color: #666;
-            cursor: pointer;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .tab-btn.active {
-            color: #ff6737;
-            font-weight: bold;
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #ff6737;
-        }
-
-        .tab-content {
-            padding: 1rem 0;
-            color: #333;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        /* 其他商品推薦區域（已修復） */
-        .related-products {
-            background-color: #f9f9f9;
-            padding: 3rem 0;
-            margin-top: 3rem;
-        }
-
-        .related-products h2 {
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-            font-size: 1.6rem;
-            color: #333;
-            padding: 0 1rem;
+            padding: 15px;
             text-align: center;
         }
-
-        .products-scroll-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            overflow: hidden;
-        }
-
-        .products-scroll {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            scrollbar-width: none;
-            justify-content: flex-start;
-        }
-
-        .products-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .product-card {
-            flex: 0 0 auto;
-            width: 220px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card img {
+        .product-img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
+            height: 120px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
         }
-
-        .product-card .info {
-            padding: 1rem;
+        .product-name {
+            font-size: 14px;
+            margin: 10px 0;
         }
-
-        .product-card .name {
-            font-size: 0.95rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-
-        .product-card .price {
-            font-size: 1.2rem;
+        .product-price {
             color: #e63946;
             font-weight: bold;
-            margin: 0;
-        }
-
-        /* 響應式調整 */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .search-bar {
-                width: 100%;
-                margin: 0;
-                max-width: none;
-            }
-
-            .product-container {
-                grid-template-columns: 1fr;
-            }
-
-            .product-info h1 {
-                font-size: 1.5rem;
-            }
-
-            .current-price {
-                font-size: 1.5rem;
-            }
-
-            .tab-btn {
-                padding: 1rem 1.2rem;
-                font-size: 1rem;
-            }
-
-            .product-card {
-                width: 200px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .product-info h1 {
-                font-size: 1.2rem;
-            }
-
-            .add-to-cart {
-                width: 100%;
-                padding: 0.8rem;
-            }
-
-            .detail-tabs {
-                flex-direction: column;
-                border-bottom: none;
-            }
-
-            .tab-btn {
-                border-bottom: 1px solid #eee;
-                text-align: left;
-                padding: 0.8rem 1rem;
-            }
-
-            .tab-btn.active::after {
-                width: 40px;
-            }
-
-            .related-products h2 {
-                font-size: 1.4rem;
-            }
-
-            .product-card {
-                width: 180px;
-            }
-
-            .product-card img {
-                height: 150px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- 導航欄 -->
-    <header>
-        <div class="logo">阿嬤購物</div>
-        <div class="search-bar">
-            <input type="text" placeholder="搜尋商品...">
-            <button>🔍</button>
-        </div>
-        <div class="cart-icon">🛒</div>
-    </header>
+    <h2 style="text-align: center;">随机推荐4款产品</h2>
+    <!-- 产品展示容器，JS会动态插入内容 -->
+    <div class="product-container" id="productWrapper"></div>
 
-    <!-- 商品內容 -->
-    <main>
-        <div class="product-container">
-            <div class="product-image">
-                <img src="images/products/backpack.jpg">
-            </div>
-            <div class="product-info">
-                <h1>白色美背復古三門二抽二格衣櫃 衣櫥 臥室收納 大容量置物</h1>
-                <div class="rating">
-                    <div class="stars">★★★★☆</div>
-                    <span>4.1</span>
-                    <span class="review-count">128 則評論</span>
-                </div>
-               
-                <div class="price">
-                    
-                    <span class="current-price">$2592</span>
-                </div>
-                <div class="quantity">
-                    <label for="quantity">數量</label>
-                    <select id="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                <button class="add-to-cart">加入購物車</button>
-            </div>
-        </div>
+    <script>
+        // 1. 模拟42款产品的原始数据（实际项目中可替换为后端接口返回的数组）
+        const allProducts = Array.from({ length: 42 }, (_, index) => ({
+            id: index + 1, // 产品唯一ID（关键，用于判重）
+            name: `产品${index + 1}`,
+            price: (Math.floor(Math.random() * 900) + 100).toFixed(2), // 随机价格100-999
+            desc: `这是产品${index + 1}的简介` // 产品简介
+        }));
 
-        <!-- 商品描述區域 -->
-        <div class="product-details">
-            <div class="detail-tabs">
-                <button class="tab-btn active">商品描述</button>
-            </div>
-            <div class="tab-content">
-                <h3>商品介紹</h3>
-                <p>本款復古風衣櫃採用環保板材製作，堅固耐用且無異味，適合臥室收納使用。</p>
-                <br>
-                <p>✨ 產品特點：</p>
-                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <li>三門二抽二格設計，分類收納更整齊</li>
-                    <li>大容量空間，滿足衣物、被褥等收納需求</li>
-                    <li>復古白色系，百搭各種臥室風格</li>
-                    <li>安裝簡便，附詳細安裝說明書</li>
-                </ul>
-                <br>
-                <p>📐 產品尺寸：寬 120cm × 深 50cm × 高 180cm</p>
-                <p>📦 包裝內容：衣櫃主件 × 1、配件包 × 1、安裝說明書 × 1</p>
-                <p>🚚 配送說明：全台免費配送，偏遠地區需另加運費，下單後 3-5 個工作日送達</p>
-            </div>
-        </div>
+        // 2. 核心方法：从数组中随机抽取指定数量的不重复元素
+        function getRandomUniqueItems(arr, count) {
+            // 深拷贝原数组，避免修改原始数据（重要，防止原数组被打乱）
+            const copyArr = [...arr];
+            const result = [];
+            // 循环抽取，直到达到指定数量或数组为空
+            for (let i = 0; i < count; i++) {
+                // 生成0到当前数组长度-1的随机索引
+                const randomIndex = Math.floor(Math.random() * copyArr.length);
+                // 从拷贝数组中删除并获取该索引的元素，加入结果集
+                const randomItem = copyArr.splice(randomIndex, 1)[0];
+                result.push(randomItem);
+            }
+            return result;
+        }
 
-        <!-- 其他商品推薦區域 -->
-        <section class="related-products">
-            <h2>其他商品推薦</h2>
-            <div class="products-scroll-container">
-                <div class="products-scroll">
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/220x180?text=衣櫃" alt="北歐風雙門衣櫃">
-                        <div class="info">
-                            <div class="name">北歐風雙門衣櫃 臥室收納櫃</div>
-                            <div class="price">$1990</div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/220x180?text=床頭櫃" alt="簡約床頭櫃">
-                        <div class="info">
-                            <div class="name">簡約雙抽床頭櫃 臥室收納</div>
-                            <div class="price">$899</div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/220x180?text=書架" alt="多層開放式書架">
-                        <div class="info">
-                            <div class="name">多層開放式書架 客廳收納架</div>
-                            <div class="price">$1290</div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/220x180?text=鞋櫃" alt="大容量防塵鞋櫃">
-                        <div class="info">
-                            <div class="name">大容量防塵鞋櫃 玄關收納</div>
-                            <div class="price">$1590</div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/220x180?text=梳妝台" alt="輕奢梳妝台組合">
-                        <div class="info">
-                            <div class="name">輕奢梳妝台組合 附鏡子收納</div>
-                            <div class="price">$2390</div>
-                        </div>
-                    </div>
+        // 3. 抽取4款不重复产品
+        const random4Products = getRandomUniqueItems(allProducts, 4);
+
+        // 4. 动态生成HTML并渲染到页面
+        function renderProducts(products) {
+            const wrapper = document.getElementById('productWrapper');
+            // 遍历抽取的产品，拼接HTML字符串（高效渲染少量元素）
+            const productHtml = products.map(product => `
+                <div class="product-item" data-product-id="${product.id}">
+                    <div class="product-img">产品图${product.id}</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-desc">${product.desc}</p>
+                    <p class="product-price">¥${product.price}</p>
                 </div>
-            </div>
-        </section>
-    </main>
+            `).join(''); // 拼接为完整HTML字符串，避免多次DOM操作
+            wrapper.innerHTML = productHtml;
+        }
+
+        // 执行渲染
+        renderProducts(random4Products);
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ import { getProduct } from "../data/products.js";
 import { getOrder } from "../data/order.js";
 import {calculateCartQuantity} from "../data/cart.js"
 
-async function loadPage() {
+function loadPage() {
     const url = new URL(window.location.href);
     const orderId = url.searchParams.get('orderId');
     const productId = url.searchParams.get('productId');
@@ -23,13 +23,7 @@ async function loadPage() {
     const orderTime = dayjs(matchingOrder.orderTime);
     const deliveryTime = dayjs(orderProduct.estimatedDeliveryTime);
     const percentProgress = ((currentTime - orderTime)/(deliveryTime - orderTime) ) * 100;
-    console.log("today:", currentTime);
-    console.log("orderTime: ", orderTime );
-    console.log("deliveryTime :" , deliveryTime );
-    
-    
-    
-    console.log(percentProgress);
+ 
     
     let trackingContent = "";
     trackingContent =

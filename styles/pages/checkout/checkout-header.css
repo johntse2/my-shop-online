@@ -27,7 +27,7 @@
 }
 
 .amazon-logo {
-  width: 100px;
+  width: 150px;
   margin-top: 12px;
 }
 
@@ -50,7 +50,7 @@
 
   .amazon-mobile-logo {
     display: inline-block;
-    height: 35px;
+    height: 40px;
     margin-top: 5px;
   }
 }
